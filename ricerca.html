@@ -1,208 +1,282 @@
 <!doctype html>
 <html lang="it">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Ricerca rifiuto</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Green Point – Ricerca rifiuto</title>
  
-  <style>
+<style>
 :root{
   --green:#0b8f55;
-  --green-light:#07a965;
-  --bg1:#f3fbf7;
-  --bg2:#e9f7f0;
-  --text:#163024;
-  --muted:#4d6a5b;
-  --border:#cfe9dc;
+  --green-soft:#e8f5ef;
+  --text:#1f2f2a;
+  --border:#d6e9e1;
 }
  
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box;}
  
 body{
   margin:0;
   font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
   color:var(--text);
-  background: linear-gradient(180deg, var(--bg1), var(--bg2));
+  background:linear-gradient(180deg,#f5fbf8,#eaf6f1);
 }
  
-.wrap{
-  max-width:560px;
+.container{
+  max-width:620px;
   margin:0 auto;
-  padding:20px 16px 30px;
+  padding:28px 20px 40px;
 }
  
-.main-title{
+/* ===== BRAND TITLE ===== */
+ 
+.brand{
   text-align:center;
-  font-size:36px;
-  font-weight:900;
-  letter-spacing:3px;
-  background: linear-gradient(90deg, var(--green), var(--green-light));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   margin-bottom:20px;
 }
  
-h2{
-  margin:0 0 8px;
-  font-size:20px;
+.brand h1{
+  font-size:30px;
+  font-weight:600;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin:0;
   color:var(--green);
 }
  
-.hint{
-  margin:0 0 16px;
-  color:var(--muted);
-  font-size:13px;
+.brand-line{
+  width:42px;
+  height:2px;
+  background:var(--green);
+  margin:10px auto 0;
+  border-radius:2px;
 }
+ 
+/* ===== IMAGE ===== */
+ 
+.hero-img{
+  display:block;
+  width:75%;
+  max-height:230px;
+  object-fit:contain;
+  margin:25px auto 30px;
+}
+ 
+/* ===== CARD ===== */
  
 .card{
   background:#ffffff;
   border:1px solid var(--border);
   border-radius:18px;
-  padding:18px;
-  box-shadow:0 15px 35px rgba(11,143,85,0.10);
+  padding:22px;
+  box-shadow:0 15px 35px rgba(0,0,0,0.05);
 }
  
-.row{
+.search-row{
   display:flex;
   gap:10px;
-  align-items:center;
 }
  
 .input{
   flex:1;
-  background:#f4fbf7;
-  border:1px solid var(--border);
-  border-radius:14px;
   padding:12px;
-  font-size:16px;
-  outline:none;
+  border-radius:12px;
+  border:1px solid var(--border);
+  font-size:15px;
 }
  
 .btn{
+  padding:12px 18px;
   border:none;
-  background: linear-gradient(135deg, var(--green), var(--green-light));
+  border-radius:12px;
+  background:linear-gradient(135deg,var(--green),#079a63);
   color:white;
-  border-radius:14px;
-  padding:12px 16px;
-  font-weight:700;
+  font-weight:600;
   cursor:pointer;
 }
  
 .result{
-  margin-top:14px;
-  background:#f4fbf7;
+  margin-top:18px;
+  padding:14px;
+  border-radius:12px;
+  background:var(--green-soft);
   border:1px solid var(--border);
-  border-radius:14px;
-  padding:12px;
-  min-height:50px;
-}
- 
-.chips{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-top:14px;
-}
- 
-.chip{
-  font-size:13px;
-  color:var(--green);
-  border:1px solid var(--border);
-  background:#ffffff;
-  padding:8px 12px;
-  border-radius:999px;
-  cursor:pointer;
+  min-height:60px;
+  font-size:14px;
+  line-height:1.5;
 }
  
 .home-link{
   display:block;
-  margin-top:18px;
   text-align:center;
+  margin-top:25px;
   color:var(--green);
   text-decoration:none;
   font-weight:600;
-}
-.hero-img{
-display:block;
-width:80%;
-max-height:240px;
-object-fit:contain;
-margin:0 auto 25px auto;
 }
 </style>
 </head>
  
 <body>
-  <div class="wrap">
-    <div class="topbar">
-      <div class="main-title">GREEN POINT</div>
-<img class="hero-img" src="hero.png" alt="Greenpoint">
-      <a class="home" href="index.html">🏠 Home</a>
-    </div>
  
-    <h2>🔎 Ricerca rifiuto</h2>
-    <p class="hint">
-      Scrivi un rifiuto (es. <em>olio</em>, <em>batteria</em>, <em>ferro</em>) oppure tocca un suggerimento.
-    </p>
+<div class="container">
  
-    <div class="card">
-      <div class="row">
-        <input class="input" id="search" type="text" placeholder="Es: olio motore, batteria, plastica…">
-        <button class="btn" onclick="cerca()">Cerca</button>
-      </div>
+<div class="brand">
+  <h1>Green Point</h1>
+  <div class="brand-line"></div>
+</div>
  
-      <div id="output" class="result">
-        <strong>Risultato:</strong> —
-      </div>
+<img class="hero-img" src="hero.png" alt="Green Point Mascotte">
  
-      <div class="chips">
-        <div class="chip" onclick="setSearch('olio')">olio</div>
-        <div class="chip" onclick="setSearch('batteria')">batteria</div>
-        <div class="chip" onclick="setSearch('ferro')">ferro</div>
-        <div class="chip" onclick="setSearch('alluminio')">alluminio</div>
-        <div class="chip" onclick="setSearch('plastica')">plastica</div>
-        <div class="chip" onclick="setSearch('filtri')">filtri</div>
-      </div>
-    </div>
-  </div>
+<div class="card">
  
-  <script>
-    const rifiuti = {
-      "olio": "CER 13 02 08* → Contenitore oli esausti",
-      "batteria": "CER 16 06 01* → Area batterie",
-      "ferro": "CER 16 01 17 → Cassone metalli ferrosi",
-      "alluminio": "CER 16 01 18 → Cassone alluminio",
-      "plastica": "CER 16 01 19 → Contenitore plastica",
-      "filtri": "CER 16 01 07* → Filtri olio"
-    };
+<div class="search-row">
+  <input id="search" class="input" type="text" placeholder="Scrivi il nome del rifiuto">
+  <button class="btn" type="button" onclick="cerca()">Cerca</button>
+</div>
  
-    function setSearch(text){
-      const input = document.getElementById("search");
-      input.value = text;
-      input.focus();
-      cerca();
+<div id="output" class="result">Risultato: —</div>
+ 
+</div>
+ 
+<a class="home-link" href="index.html">🏠 Torna alla Home</a>
+ 
+</div>
+ 
+<script>
+ 
+const rifiuti = [
+  { nome: "scarto di sigillanti", cer: "080410", unita: "CE" },
+{ nome: "olio motore esausto", cer: "130208*", unita: "CE" },
+{ nome: "solvente esausto", cer: "140603*", unita: "CE" },
+{ nome: "carta cartone", cer: "150101", unita: "CE" },
+{ nome: "carta cartone non pressato", cer: "150101", unita: "CE" },
+{ nome: "imballaggi plastica-nylon pulito", cer: "150102", unita: "CE" },
+{ nome: "imballaggi legno", cer: "150103", unita: "CE" },
+{ nome: "imballaggi materiali misti", cer: "150106", unita: "CE" },
+{ nome: "imballi imbrattati", cer: "150110*", unita: "CE" },
+{ nome: "teli lavatrice reman", cer: "150202*", unita: "CE" },
+{ nome: "sabbia assorbente", cer: "150202*", unita: "CE" },
+{ nome: "dpi stracci guanti tute", cer: "150202*", unita: "CE" },
+{ nome: "filtri aria abitacolo", cer: "150203", unita: "CE" },
+{ nome: "filtri aria cabine verniciatura", cer: "150202*", unita: "CE" },
+{ nome: "bombolette spray", cer: "160504*", unita: "CE " },
+{ nome: "filtri olio", cer: "160107*", unita: "CE" },
+{ nome: "pastiglie freni", cer: "160112", unita: "CE" },
+{ nome: "paraflu'", cer: "160114*", unita: "CE" },
+{ nome: "metalli ferrosi da autoveicoli", cer: "160117", unita: "CE" },
+{ nome: "motori e cambi", cer: "160117", unita: "CE" },
+{ nome: "metalli non ferrosi da autoveicoli", cer: "160118", unita: "CE" },
+{ nome: "cerchi ruota", cer: "160118", unita: "CE" },
+{ nome: "plastica da autoveicoli", cer: "160119", unita: "CE" },
+{ nome: "vetro da autoveicoli", cer: "160120", unita: "CE" },
+{ nome: "plastica imbrattata", cer: "160121*", unita: "CE" },
+{ nome: "ferro imbrattato", cer: "160121*", unita: "CE" },
+{ nome: "componenti non specificati altrimenti", cer: "160122", unita: "CE" },
+{ nome: "sonde lambda", cer: "160122", unita: "CE" },
+{ nome: "caricabatterie motori elettrici", cer: "160214", unita: "CE" },
+{ nome: "catalzzatori esauriti", cer: "160801", unita: "CE" },
+{ nome: "acque di lavaggio iscot", cer: "161002", unita: "CE" },
+{ nome: "vetro", cer: "170202", unita: "CE" },
+{ nome: "plastica", cer: "170203", unita: "CE" },
+{ nome: "alluminio", cer: "170402", unita: "CE" },
+{ nome: "ferro e acciaio", cer: "170405", unita: "CE" },
+{ nome: "cavi elettrici", cer: "170411", unita: "CE" },
+{ nome: "neon", cer: "200121*", unita: "CE" },
+{ nome: "residui pulizia stradale", cer: "200303", unita: "CE" },
+{ nome: "carta abrasiva", cer: "120121", unita: "CE" },
+{ nome: "rifiuti ingombranti", cer: "200307", unita: "CE" },
+{ nome: "centraline moduli urea", cer: "160214", unita: "CE" },
+{ nome: "centraline ", cer: "160214", unita: "CE" },
+{ nome: "alternatori", cer: "160216", unita: "CE" },
+{ nome: "motorini d'avviamento", cer: "160216", unita: "CE" },
+{ nome: "thermal  pad", cer: "160304", unita: "CE" },
+{ nome: "serbatoi urea con residuo", cer: "160121*", unita: "CE" },
+{ nome: "altre emulsioni", cer: "130802*", unita: "CE" },
+{ nome: "moduli litio", cer: "160605", unita: "CE" },
+{ nome: "batterie litio", cer: "160605", unita: "CE" },
+{ nome: "motori elettrici", cer: "160214", unita: "CE" },
+{ nome: "carboni attivi", cer: "150202*", unita: "CE" },
+{ nome: "urea (residuo estratto dai serbatoi sorting)", cer: "160305*", unita: "CE" },
+{ nome: "rame", cer: "170401", unita: "CE" },
+{ nome: "olio motore esausto", cer: "130208*", unita: "PORTA28" },
+{ nome: "diesel", cer: "130701*", unita: "PORTA28" },
+{ nome: "benzina", cer: "130703*", unita: "PORTA28" },
+{ nome: "gas refrigerante ", cer: "140601* ", unita: "PORTA28" },
+{ nome: "carta cartone", cer: "150101", unita: "PORTA28" },
+{ nome: "imballaggi plastica-nylon pulito", cer: "150102", unita: "PORTA28" },
+{ nome: "dpi stracci guanti tute", cer: "150202*", unita: "PORTA28" },
+{ nome: "sabbia assorbente", cer: "150202*", unita: "PORTA28" },
+{ nome: "pneumatici fuori uso", cer: "160103", unita: "PORTA28" },
+{ nome: "veicoli fuori uso bonificati-scocche", cer: "160106", unita: "PORTA28" },
+{ nome: "filtri olio", cer: "160107*", unita: "PORTA28" },
+{ nome: "airbag inesplosi", cer: "160110*", unita: "PORTA28" },
+{ nome: "pastiglie freni", cer: "160112", unita: "PORTA28" },
+{ nome: "metalli ferrosi da autoveicoli", cer: "160117", unita: "PORTA28" },
+{ nome: "cerchi ruota", cer: "160118", unita: "PORTA28" },
+{ nome: "tessuto aiirbag", cer: "160119", unita: "PORTA28" },
+{ nome: "componenti non specificati altrimenti blocchi motore", cer: "160122", unita: "PORTA28" },
+{ nome: "componenti non specificati altrimenti pannelleria", cer: "160122", unita: "PORTA28" },
+{ nome: "componenti non specificati altrimenti scarti di cinture di sicurezza", cer: "160122", unita: "PORTA28" },
+{ nome: "componenti non specificati altrimenti spugne sedili", cer: "160122", unita: "PORTA28" },
+{ nome: "plastica da autoveicoli", cer: "160119", unita: "PORTA28" },
+{ nome: "inverter", cer: "160214", unita: "PORTA28" },
+{ nome: "centraline", cer: "160214", unita: "PORTA28" },
+{ nome: "radio navigatore", cer: "160214", unita: "PORTA28" },
+{ nome: "chiavi", cer: "160214", unita: "PORTA28" },
+{ nome: "urea ad-blue", cer: "160306", unita: "PORTA28" },
+{ nome: "bombole gpl metano", cer: "160504*", unita: "PORTA28" },
+{ nome: "batterie al piombo", cer: "160601*", unita: "PORTA28" },
+{ nome: "batterie litio", cer: "160605", unita: "PORTA28" },
+{ nome: "liquido lavavetri", cer: "161002", unita: "PORTA28" },
+
+
+
+];
+ 
+ function cerca() {
+ 
+  const input = document.getElementById("search");
+  const out = document.getElementById("output");
+ 
+  const valore = input.value.toLowerCase().trim();
+ 
+  if (valore === "") {
+    out.innerHTML = "Inserisci un rifiuto da cercare.";
+    return;
+  }
+ 
+  let risultati = [];
+ 
+  for (let i = 0; i < rifiuti.length; i++) {
+    if (rifiuti[i].nome.includes(valore)) {
+      risultati.push(rifiuti[i]);
     }
+  }
  
-    function cerca() {
-      const valore = (document.getElementById("search").value || "").toLowerCase().trim();
-      let risultato = "Rifiuto non trovato. Prova con un altro termine.";
+  if (risultati.length === 0) {
+    out.innerHTML = "Nessun rifiuto trovato.";
+    return;
+  }
  
-      for (const key in rifiuti) {
-        if (valore.includes(key)) {
-          risultato = rifiuti[key];
-        }
-      }
+  let html = "";
  
-      document.getElementById("output").innerHTML =
-        "<strong>Risultato:</strong> " + risultato;
-    }
+  for (let i = 0; i < risultati.length; i++) {
  
-    // Bonus: invio da tastiera = cerca
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") cerca();
-    });
-  </script>
+    html +=
+      "<div style='margin-bottom:14px;padding:12px;border:1px solid #d6e9e1;border-radius:12px;background:#f4fbf7'>" +
+      "<div style='font-weight:600;font-size:15px;margin-bottom:6px'>" + risultati[i].nome + "</div>" +
+      "<div style='font-weight:600;color:#0b8f55;margin-bottom:4px'>CER " + risultati[i].cer + "</div>" +
+      "<div><strong>Unità locale:</strong> " + risultati[i].unita + "</div>" +
+      "</div>";
+  }
+ 
+  out.innerHTML = html;
+
+
+}
+ 
+</script>
+ 
 </body>
 </html>
