@@ -1,10 +1,134 @@
 <!doctype html>
 <html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Green Point</title>
+ 
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0b8f55">
+ 
+<style>
+:root{
+  --green:#0b8f55;
+  --green-soft:#e8f5ef;
+  --text:#1f2f2a;
+  --border:#d6e9e1;
+}
+ 
+*{box-sizing:border-box;}
+ 
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  color:var(--text);
+  background:linear-gradient(180deg,#f5fbf8,#eaf6f1);
+}
+ 
+.container{
+  max-width:620px;
+  margin:0 auto;
+  padding:28px 20px 40px;
+}
+ 
+/* ===== BRAND ===== */
+ 
+.brand{
+  text-align:center;
+  margin-bottom:20px;
+}
+ 
+.brand h1{
+  font-size:30px;
+  font-weight:600;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin:0;
+  color:var(--green);
+}
+ 
+.brand-line{
+  width:42px;
+  height:2px;
+  background:var(--green);
+  margin:10px auto 0;
+  border-radius:2px;
+}
+ 
+/* ===== IMAGE ===== */
+ 
+.hero-img{
+  display:block;
+  width:75%;
+  max-height:230px;
+  object-fit:contain;
+  margin:25px auto 30px;
+}
+ 
+/* ===== CARD ===== */
+ 
+.card{
+  background:#ffffff;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:25px;
+  box-shadow:0 15px 35px rgba(0,0,0,0.05);
+}
+ 
+.menu-button{
+  display:block;
+  width:100%;
+  padding:14px;
+  margin-bottom:14px;
+  text-align:center;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background:var(--green-soft);
+  color:var(--text);
+  font-weight:600;
+  text-decoration:none;
+  transition:0.2s ease;
+}
+ 
+.menu-button:hover{
+  background:#dff2ea;
+}
+ 
+.menu-button.primary{
+  background:linear-gradient(135deg,var(--green),#079a63);
+  color:white;
+  border:none;
+}
+</style>
+</head>
+ 
 <body>
-<h1>GREEN POINT</h1>
-
-<p><a href="ricerca.html">Ricerca rifiuto</a></p>
-<p><a hreaf="contatti.html">Chi contattare</a></p>
-<p><a hreaf="segnala.html">Segnala un problema</a></p>
-<p><a hreaf="iso14001.html">ISO 14001</a></p>
-<p><a hreaf="oextra.html">Extra</a></p>
+ 
+<div class="container">
+ 
+<div class="brand">
+  <h1>Green Point</h1>
+  <div class="brand-line"></div>
+</div>
+ 
+<img class="hero-img" src="hero.png" alt="Green Point Mascotte">
+ 
+<div class="card">
+ 
+<a href="ricerca.html" class="menu-button primary">🔎 Ricerca rifiuto</a>
+ 
+<a href="#" class="menu-button">📞 Chi contattare</a>
+ 
+<a href="#" class="menu-button">⚠️ Segnala un problema</a>
+ 
+<a href="#" class="menu-button">📘 ISO 14001</a>
+ 
+<a href="#" class="menu-button">➕ Extra</a>
+ 
+</div>
+ 
+</div>
+ 
+</body>
+</html>
+ 
