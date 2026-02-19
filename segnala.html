@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Green Point – Segnala un problema</title>
+ 
+<style>
+:root{
+  --green:#0b8f55;
+  --text:#1f2f2a;
+  --border:#d6e9e1;
+}
+ 
+*{box-sizing:border-box;}
+ 
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  color:var(--text);
+  background:linear-gradient(180deg,#f5fbf8,#eaf6f1);
+}
+ 
+.container{
+  max-width:700px;
+  margin:0 auto;
+  padding:32px 20px 50px;
+}
+ 
+/* ===== TITLE ===== */
+ 
+.brand{
+  text-align:center;
+  margin-bottom:18px;
+}
+ 
+.brand h1{
+  font-size:26px;
+  font-weight:600;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin:0;
+  color:var(--green);
+}
+ 
+.brand-line{
+  width:42px;
+  height:2px;
+  background:var(--green);
+  margin:10px auto 0;
+  border-radius:2px;
+}
+ 
+/* ===== HERO IMAGE ===== */
+ 
+.hero-img{
+  display:block;
+  width:70%;
+  max-height:200px;
+  object-fit:contain;
+  margin:20px auto 26px;
+}
+ 
+/* ===== CARD ===== */
+ 
+.card{
+  background:#ffffff;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:24px;
+  box-shadow:0 15px 35px rgba(0,0,0,0.05);
+}
+ 
+.label{
+  font-weight:600;
+  margin-bottom:6px;
+  margin-top:12px;
+}
+ 
+.select, .textarea{
+  width:100%;
+  padding:12px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  font-size:15px;
+}
+ 
+.textarea{
+  min-height:120px;
+  resize:vertical;
+}
+ 
+.btn{
+  width:100%;
+  margin-top:18px;
+  padding:14px;
+  border:none;
+  border-radius:16px;
+  background:#25D366;
+  color:white;
+  font-weight:700;
+  font-size:16px;
+  cursor:pointer;
+}
+ 
+.home-link{
+  display:block;
+  text-align:center;
+  margin-top:25px;
+  color:var(--green);
+  text-decoration:none;
+  font-weight:600;
+}
+ 
+@media (max-width:480px){
+  .hero-img{width:70%;}
+}
+</style>
+</head>
+ 
+<body>
+ 
+<div class="container">
+ 
+  <div class="brand">
+    <h1>Segnala un problema</h1>
+    <div class="brand-line"></div>
+  </div>
+ 
+  <img class="hero-img" src="segnalaproblema.png" alt="Segnala problema">
+ 
+  <div class="card">
+ 
+    <div class="label">Area operativa</div>
+    <select id="area" class="select">
+      <option value="">— Seleziona —</option>
+      <option value="Sorting">Sorting</option>
+      <option value="Veicolo">Veicolo</option>
+      <option value="Dismantling">Dismantling</option>
+      <option value="Reman PWT">Reman PWT</option>
+      <option value="Reman HVB">Reman HVB</option>
+    </select>
+ 
+    <div class="label">Tipo di problema</div>
+    <select id="tipo" class="select">
+      <option value="">— Seleziona —</option>
+      <option value="Rifiuti / CER">Rifiuti / CER</option>
+      <option value="Ambiente (sversamento, odori, polveri)">Ambiente</option>
+      <option value="Sicurezza">Sicurezza</option>
+      <option value="Impianto / attrezzature">Impianto</option>
+      <option value="Altro">Altro</option>
+    </select>
+ 
+    <div class="label">Descrizione</div>
+    <textarea id="descrizione" class="textarea" placeholder="Descrivi il problema..."></textarea>
+ 
+    <button class="btn" onclick="inviaSegnalazione()">🟢 Invia su WhatsApp</button>
+ 
+  </div>
+ 
+  <a class="home-link" href="index.html">🏠 Torna alla Home</a>
+ 
+</div>
+ 
+<script>
+ 
+/* METTI QUI IL TUO NUMERO */
+const WHATSAPP_NUMBER = "+3993346002378";
+ 
+function inviaSegnalazione(){
+ 
+  const area = document.getElementById("area").value;
+  const tipo = document.getElementById("tipo").value;
+  const descr = document.getElementById("descrizione").value;
+ 
+  if(!area || !tipo || !descr){
+    alert("Compila tutti i campi.");
+    return;
+  }
+ 
+  const dataOra = new Date().toLocaleString();
+ 
+  const messaggio =
+    "📌 Segnalazione Green Point\n\n" +
+    "Data: " + dataOra + "\n" +
+    "Area: " + area + "\n" +
+    "Tipo: " + tipo + "\n\n" +
+    "Descrizione:\n" + descr;
+ 
+  const numero = WHATSAPP_NUMBER.replace("+","");
+  const url = "https://wa.me/" + numero + "?text=" + encodeURIComponent(messaggio);
+ 
+  window.open(url, "_blank");
+}
+ 
+</script>
+ 
+</body>
+</html>
