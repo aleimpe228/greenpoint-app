@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Green Point – ISO 14001</title>
+ 
+<style>
+:root{
+  --green:#0b8f55;
+  --text:#1f2f2a;
+  --border:#d6e9e1;
+  --green-soft:#e8f5ef;
+}
+ 
+*{box-sizing:border-box;}
+ 
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  color:var(--text);
+  background:linear-gradient(180deg,#f5fbf8,#eaf6f1);
+}
+ 
+.container{
+  max-width:720px;
+  margin:0 auto;
+  padding:32px 20px 50px;
+}
+ 
+/* ===== TITLE ===== */
+ 
+.brand{
+  text-align:center;
+  margin-bottom:18px;
+}
+ 
+.brand h1{
+  font-size:26px;
+  font-weight:600;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin:0;
+  color:var(--green);
+}
+ 
+.brand-line{
+  width:42px;
+  height:2px;
+  background:var(--green);
+  margin:10px auto 0;
+  border-radius:2px;
+}
+ 
+/* ===== HERO IMAGE ===== */
+ 
+.hero-img{
+  display:block;
+  width:55%;
+  max-height:170px;
+  object-fit:contain;
+  margin:18px auto 24px;
+}
+ 
+/* ===== CARD ===== */
+ 
+.card{
+  background:#ffffff;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:24px;
+  box-shadow:0 15px 35px rgba(0,0,0,0.05);
+}
+ 
+/* ===== FILTERS ===== */
+ 
+.row{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:18px;
+}
+ 
+.input, .select{
+  padding:12px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  font-size:15px;
+}
+ 
+.input{
+  flex:1;
+  min-width:200px;
+}
+ 
+.select{
+  min-width:200px;
+}
+ 
+/* ===== ITEM ===== */
+ 
+.item{
+  background:var(--green-soft);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:16px;
+  margin-bottom:14px;
+}
+ 
+.item-title{
+  font-weight:700;
+  margin-bottom:6px;
+}
+ 
+.item-type{
+  font-size:13px;
+  opacity:0.7;
+  margin-bottom:10px;
+}
+ 
+.btn{
+  display:inline-block;
+  padding:10px 14px;
+  border-radius:14px;
+  background:linear-gradient(135deg,var(--green),#079a63);
+  color:white;
+  text-decoration:none;
+  font-weight:600;
+}
+ 
+.home-link{
+  display:block;
+  text-align:center;
+  margin-top:25px;
+  color:var(--green);
+  text-decoration:none;
+  font-weight:600;
+}
+ 
+</style>
+</head>
+ 
+<body>
+ 
+<div class="container">
+ 
+  <div class="brand">
+    <h1>ISO 14001</h1>
+    <div class="brand-line"></div>
+  </div>
+ 
+  <img class="hero-img" src="iso.png" alt="ISO 14001">
+ 
+  <div class="card">
+ 
+    <div class="row">
+      <input id="search" class="input" type="text" placeholder="Cerca documento..." oninput="render()">
+ 
+      <select id="categoria" class="select" onchange="render()">
+        <option value="">— Tutto —</option>
+        <option value="procedure">Procedure</option>
+        <option value="istruzioni">Istruzioni operative</option>
+      </select>
+    </div>
+ 
+    <div id="output"></div>
+ 
+  </div>
+ 
+  <a class="home-link" href="index.html">🏠 Torna alla Home</a>
+ 
+</div>
+ 
+<script>
+ 
+/* INCOLLA QUI I DOCUMENTI GENERATI DA EXCEL */
+ 
+const documenti = [
+  // esempio:
+  // { categoria:"procedure", titolo:"Gestione rifiuti", link:"https://sharepoint....pdf" }
+];
+ 
+function render(){
+ 
+  const q = document.getElementById("search").value.toLowerCase();
+  const cat = document.getElementById("categoria").value;
+  const out = document.getElementById("output");
+ 
+  let lista = documenti;
+ 
+  if(cat){
+    lista = lista.filter(d => d.categoria === cat);
+  }
+ 
+  if(q){
+    lista = lista.filter(d => d.titolo.toLowerCase().includes(q));
+  }
+ 
+  if(lista.length === 0){
+    out.innerHTML = "Nessun documento trovato.";
+    return;
+  }
+ 
+  let html = "";
+ 
+  for(const d of lista){
+ 
+    const tipo = d.categoria === "procedure"
+      ? "PROCEDURA"
+      : "ISTRUZIONE OPERATIVA";
+ 
+    html +=
+      "<div class='item'>" +
+        "<div class='item-title'>" + d.titolo + "</div>" +
+        "<div class='item-type'>" + tipo + "</div>" +
+        "<a class='btn' href='" + d.link + "' target='_blank'>Apri documento</a>" +
+      "</div>";
+  }
+ 
+  out.innerHTML = html;
+}
+ 
+render();
+ 
+</script>
+ 
+</body>
+</html>
