@@ -5,9 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Green Point</title>
  
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0b8f55">
- 
 <style>
 :root{
   --green:#0b8f55;
@@ -67,7 +64,7 @@ body{
 }
  
 .logo{
-  height:100px;
+  height:95px;
   width:auto;
   max-width:320px;
   object-fit:contain;
@@ -108,19 +105,82 @@ body{
   border:none;
 }
  
-/* ===== RESPONSIVE ===== */
+/* ===== LOGIN ===== */
  
-@media (max-width:480px){
-  .logo{
-    height:58px;
-    max-width:240px;
-  }
+#loginScreen{
+  display:none;
+  min-height:100vh;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  background:linear-gradient(180deg,#f5fbf8,#eaf6f1);
 }
+ 
+.login-box{
+  max-width:420px;
+  width:100%;
+  background:#ffffff;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:22px;
+  box-shadow:0 15px 35px rgba(0,0,0,0.06);
+}
+ 
+.login-title{
+  text-align:center;
+  font-weight:700;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--green);
+  margin-bottom:12px;
+}
+ 
+.login-input{
+  width:100%;
+  padding:12px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  font-size:15px;
+}
+ 
+.login-btn{
+  width:100%;
+  margin-top:14px;
+  padding:14px;
+  border:none;
+  border-radius:16px;
+  background:linear-gradient(135deg,var(--green),#079a63);
+  color:#fff;
+  font-weight:700;
+  font-size:16px;
+  cursor:pointer;
+}
+ 
+.login-error{
+  display:none;
+  margin-top:12px;
+  color:#b42318;
+  font-weight:600;
+  font-size:14px;
+  text-align:center;
+}
+ 
 </style>
 </head>
  
 <body>
  
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-box">
+    <div class="login-title">Green Point</div>
+    <input id="gpPass" type="password" class="login-input" placeholder="Inserisci password">
+    <button class="login-btn" onclick="gpLogin()">Accedi</button>
+    <div id="gpErr" class="login-error">Password errata</div>
+  </div>
+</div>
+ 
+<!-- APP -->
 <div class="container">
  
   <div class="brand">
@@ -128,26 +188,56 @@ body{
     <div class="brand-line"></div>
   </div>
  
-  <!-- LOGHI AZIENDALI -->
   <div class="logos">
     <img class="logo" src="logostellantis.png" alt="Stellantis">
     <img class="logo" src="logocircular.png" alt="Sustainera Circular Economy">
   </div>
  
-  <!-- MENU -->
   <div class="card">
- 
     <a href="ricerca.html" class="menu-button primary">🔎 Ricerca rifiuto</a>
- 
     <a href="contatti.html" class="menu-button">📞 Chi contattare</a>
- 
     <a href="segnala.html" class="menu-button">⚠️ Segnala un problema</a>
- 
     <a href="iso.html" class="menu-button">📘 ISO 14001</a>
- 
   </div>
  
 </div>
+ 
+<script>
+ 
+/* ===== PASSWORD ===== */
+const GP_PASSWORD = "CircularEconomy2026";
+const GP_STORAGE_KEY = "gp_authed";
+ 
+function gpShowLogin(){
+  document.getElementById("loginScreen").style.display = "flex";
+  document.querySelector(".container").style.display = "none";
+}
+ 
+function gpShowApp(){
+  document.getElementById("loginScreen").style.display = "none";
+  document.querySelector(".container").style.display = "block";
+}
+ 
+function gpLogin(){
+  const v = document.getElementById("gpPass").value.trim();
+  if(v === GP_PASSWORD){
+    localStorage.setItem(GP_STORAGE_KEY,"1");
+    gpShowApp();
+  }else{
+    document.getElementById("gpErr").style.display = "block";
+  }
+}
+ 
+(function init(){
+  const ok = localStorage.getItem(GP_STORAGE_KEY) === "1";
+  if(ok){
+    gpShowApp();
+  }else{
+    gpShowLogin();
+  }
+})();
+ 
+</script>
  
 </body>
 </html>
