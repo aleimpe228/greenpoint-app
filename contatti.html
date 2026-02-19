@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Green Point – Chi contattare</title>
+ 
+<style>
+:root{
+  --green:#0b8f55;
+  --green-soft:#e8f5ef;
+  --text:#1f2f2a;
+  --border:#d6e9e1;
+}
+ 
+*{box-sizing:border-box;}
+ 
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  color:var(--text);
+  background:linear-gradient(180deg,#f5fbf8,#eaf6f1);
+}
+ 
+.container{
+  max-width:700px;
+  margin:0 auto;
+  padding:32px 20px 50px;
+}
+ 
+/* ===== TITLE ===== */
+ 
+.brand{
+  text-align:center;
+  margin-bottom:18px;
+}
+ 
+.brand h1{
+  font-size:26px;
+  font-weight:600;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin:0;
+  color:var(--green);
+}
+ 
+.brand-line{
+  width:42px;
+  height:2px;
+  background:var(--green);
+  margin:10px auto 0;
+  border-radius:2px;
+}
+ 
+/* ===== HERO IMAGE ===== */
+ 
+.hero-img{
+  display:block;
+  width:55%;
+  max-height:320px;
+  object-fit:contain;
+  margin:18px auto 24px;
+}
+ 
+/* ===== CARD ===== */
+ 
+.card{
+  background:#ffffff;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:24px;
+  box-shadow:0 15px 35px rgba(0,0,0,0.05);
+}
+ 
+/* ===== SELECT ===== */
+ 
+.select{
+  width:100%;
+  padding:12px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  font-size:15px;
+  margin-bottom:20px;
+}
+ 
+/* ===== CONTACT CARD ===== */
+ 
+.contact{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:#ffffff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:16px;
+  margin-bottom:14px;
+  box-shadow:0 8px 18px rgba(0,0,0,0.04);
+}
+ 
+.contact-info{
+  flex:1;
+}
+ 
+.name{
+  font-weight:700;
+  font-size:15px;
+  margin-bottom:4px;
+}
+ 
+.area{
+  font-size:13px;
+  opacity:0.7;
+}
+ 
+.actions{
+  display:flex;
+  gap:10px;
+}
+ 
+.icon-btn{
+  width:38px;
+  height:38px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:10px;
+  text-decoration:none;
+  font-size:18px;
+  border:1px solid var(--border);
+  background:#fff;
+}
+ 
+.icon-call{color:#0b8f55;}
+.icon-mail{color:#1f2f2a;}
+ 
+.icon-wa{
+  background:#25D366;
+  color:white;
+  border:none;
+}
+ 
+.home-link{
+  display:block;
+  text-align:center;
+  margin-top:25px;
+  color:var(--green);
+  text-decoration:none;
+  font-weight:600;
+}
+ 
+@media (max-width:480px){
+  .hero-img{width:70%;}
+}
+ 
+</style>
+</head>
+ 
+<body>
+ 
+<div class="container">
+ 
+  <div class="brand">
+    <h1>Chi contattare</h1>
+    <div class="brand-line"></div>
+  </div>
+ 
+  <img class="hero-img" src="contatti.png" alt="Contatti">
+ 
+  <div class="card">
+ 
+    <select id="area" class="select" onchange="mostraContatti()">
+      <option value="">— Seleziona area operativa —</option>
+      <option value="sorting">Sorting</option>
+      <option value="veicolo">Veicolo</option>
+      <option value="dismantling">Dismantling</option>
+      <option value="remanpwt">Reman PWT</option>
+      <option value="remanhvb">Reman HVB</option>
+    </select>
+ 
+    <div id="output">
+      Seleziona un’area per visualizzare i contatti.
+    </div>
+ 
+  </div>
+ 
+  <a class="home-link" href="index.html">🏠 Torna alla Home</a>
+ 
+</div>
+ 
+<script>
+ 
+/* INCOLLA QUI I CONTATTI GENERATI DA EXCEL */
+ 
+const contatti = [
+  // esempio:
+  // { area:"sorting", nome:"Mario", cognome:"Rossi", telefono:"+393331234567", email:"mario.rossi@azienda.it" }
+];
+ 
+function mostraContatti(){
+ 
+  const areaSelezionata = document.getElementById("area").value;
+  const out = document.getElementById("output");
+ 
+  if(!areaSelezionata){
+    out.innerHTML = "Seleziona un’area per visualizzare i contatti.";
+    return;
+  }
+ 
+  let lista = contatti.filter(c =>
+    (c.area || "").toLowerCase().trim() === areaSelezionata
+  );
+ 
+  if(lista.length === 0){
+    out.innerHTML = "Nessun contatto per questa area.";
+    return;
+  }
+ 
+  lista.sort((a,b) =>
+    (a.cognome + a.nome).localeCompare(b.cognome + b.nome)
+  );
+ 
+  let html = "";
+ 
+  for(const c of lista){
+ 
+    const nomeCompleto = c.nome + " " + c.cognome;
+    const telLink = "tel:" + c.telefono;
+    const mailLink = "mailto:" + c.email;
+    const waNumber = c.telefono.replace("+","");
+    const waLink = "https://wa.me/" + waNumber;
+ 
+    html +=
+      "<div class='contact'>" +
+        "<div class='contact-info'>" +
+          "<div class='name'>" + nomeCompleto + "</div>" +
+          "<div class='area'>" + areaSelezionata.toUpperCase() + "</div>" +
+        "</div>" +
+        "<div class='actions'>" +
+          "<a class='icon-btn icon-call' href='" + telLink + "'>📞</a>" +
+          "<a class='icon-btn icon-mail' href='" + mailLink + "'>✉️</a>" +
+          "<a class='icon-btn icon-wa' href='" + waLink + "' target='_blank'>🟢</a>" +
+        "</div>" +
+      "</div>";
+  }
+ 
+  out.innerHTML = html;
+}
+ 
+</script>
+ 
+</body>
+</html>

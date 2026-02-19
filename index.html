@@ -26,20 +26,20 @@ body{
 }
  
 .container{
-  max-width:620px;
+  max-width:680px;
   margin:0 auto;
-  padding:28px 20px 40px;
+  padding:32px 20px 50px;
 }
  
-/* ===== BRAND ===== */
+/* ===== TITLE ===== */
  
 .brand{
   text-align:center;
-  margin-bottom:20px;
+  margin-bottom:18px;
 }
  
 .brand h1{
-  font-size:30px;
+  font-size:28px;
   font-weight:600;
   letter-spacing:3px;
   text-transform:uppercase;
@@ -55,33 +55,41 @@ body{
   border-radius:2px;
 }
  
-/* ===== IMAGE ===== */
+/* ===== LOGHI ===== */
  
-.hero-img{
-  display:block;
-  width:75%;
-  max-height:230px;
-  object-fit:contain;
-  margin:25px auto 30px;
+.logos{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:22px;
+  flex-wrap:wrap;
+  margin:26px auto 32px;
 }
  
-/* ===== CARD ===== */
+.logo{
+  height:100px;
+  width:auto;
+  max-width:320px;
+  object-fit:contain;
+}
+ 
+/* ===== CARD MENU ===== */
  
 .card{
   background:#ffffff;
   border:1px solid var(--border);
-  border-radius:18px;
-  padding:25px;
+  border-radius:20px;
+  padding:28px;
   box-shadow:0 15px 35px rgba(0,0,0,0.05);
 }
  
 .menu-button{
   display:block;
   width:100%;
-  padding:14px;
+  padding:16px;
   margin-bottom:14px;
   text-align:center;
-  border-radius:14px;
+  border-radius:16px;
   border:1px solid var(--border);
   background:var(--green-soft);
   color:var(--text);
@@ -99,6 +107,15 @@ body{
   color:white;
   border:none;
 }
+ 
+/* ===== RESPONSIVE ===== */
+ 
+@media (max-width:480px){
+  .logo{
+    height:58px;
+    max-width:240px;
+  }
+}
 </style>
 </head>
  
@@ -106,26 +123,29 @@ body{
  
 <div class="container">
  
-<div class="brand">
-  <h1>Green Point</h1>
-  <div class="brand-line"></div>
-</div>
+  <div class="brand">
+    <h1>Green Point</h1>
+    <div class="brand-line"></div>
+  </div>
  
-<img class="hero-img" src="hero.png" alt="Green Point Mascotte">
+  <!-- LOGHI AZIENDALI -->
+  <div class="logos">
+    <img class="logo" src="logostellantis.png" alt="Stellantis">
+    <img class="logo" src="logocircular.png" alt="Sustainera Circular Economy">
+  </div>
  
-<div class="card">
+  <!-- MENU -->
+  <div class="card">
  
-<a href="ricerca.html" class="menu-button primary">🔎 Ricerca rifiuto</a>
+    <a href="ricerca.html" class="menu-button primary">🔎 Ricerca rifiuto</a>
  
-<a href="#" class="menu-button">📞 Chi contattare</a>
+    <a href="contatti.html" class="menu-button">📞 Chi contattare</a>
  
-<a href="#" class="menu-button">⚠️ Segnala un problema</a>
+    <a href="segnala.html" class="menu-button">⚠️ Segnala un problema</a>
  
-<a href="#" class="menu-button">📘 ISO 14001</a>
+    <a href="iso.html" class="menu-button">📘 ISO 14001</a>
  
-<a href="#" class="menu-button">➕ Extra</a>
- 
-</div>
+  </div>
  
 </div>
  
