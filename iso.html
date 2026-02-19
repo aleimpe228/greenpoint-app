@@ -137,6 +137,9 @@ body{
   font-weight:600;
 }
  
+@media (max-width:480px){
+  .hero-img{width:70%;}
+}
 </style>
 </head>
  
@@ -160,6 +163,7 @@ body{
         <option value="">— Tutto —</option>
         <option value="procedure">Procedure</option>
         <option value="istruzioni">Istruzioni operative</option>
+        <option value="generali">Aspetti generali</option>
       </select>
     </div>
  
@@ -172,27 +176,50 @@ body{
 </div>
  
 <script>
- 
-/* INCOLLA QUI I DOCUMENTI GENERATI DA EXCEL */
- 
+/* ===== INSERISCI QUI I DOCUMENTI =====
+   link deve puntare ai PDF locali, es:
+   link:"pdf/01-politica-ambientale.pdf"
+*/
 const documenti = [
-{ categoria:"procedure", titolo:"politica ambientale", link:"pdf/01-politica-ambientale.pdf"},																									
-												
+  { categoria:"generali", titolo:"Politica Ambientale", link:"pdf/politica-ambientale.pdf" },
+{ categoria:"generali", titolo:"Analisi Ambientale", link:"pdf/analisi-ambientale.pdf" },
+{ categoria:"generali", titolo:"Manuale SGA", link:"pdf/01-manuale-sga.pdf" }
 
-
-
-];
+ ];
+ 
+ 
+function normCat(x){
+  return (x || "")
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replaceAll(" ", "");
+}
+ 
+function labelCat(c){
+  const k = normCat(c);
+  if(k === "procedure") return "PROCEDURA";
+  if(k === "istruzioni") return "ISTRUZIONE OPERATIVA";
+  if(k === "generali" || k === "aspettigenerali") return "ASPETTI GENERALI";
+  return "DOCUMENTO";
+}
  
 function render(){
- 
-  const q = document.getElementById("search").value.toLowerCase();
-  const cat = document.getElementById("categoria").value;
+  const q = (document.getElementById("search").value || "").toLowerCase().trim();
+  const catSel = normCat(document.getElementById("categoria").value);
   const out = document.getElementById("output");
  
-  let lista = documenti;
+  // normalizzo e filtro i dati
+  let lista = documenti
+    .filter(d => d && d.titolo && d.link)
+    .map(d => ({
+      categoria: normCat(d.categoria),
+      titolo: d.titolo,
+      link: d.link
+    }));
  
-  if(cat){
-    lista = lista.filter(d => d.categoria === cat);
+  if(catSel){
+    lista = lista.filter(d => d.categoria === catSel);
   }
  
   if(q){
@@ -204,18 +231,15 @@ function render(){
     return;
   }
  
+  // ordine alfabetico per titolo
+  lista.sort((a,b) => a.titolo.localeCompare(b.titolo));
+ 
   let html = "";
- 
   for(const d of lista){
- 
-    const tipo = d.categoria === "procedure"
-      ? "PROCEDURA"
-      : "ISTRUZIONE OPERATIVA";
- 
     html +=
       "<div class='item'>" +
         "<div class='item-title'>" + d.titolo + "</div>" +
-        "<div class='item-type'>" + tipo + "</div>" +
+        "<div class='item-type'>" + labelCat(d.categoria) + "</div>" +
         "<a class='btn' href='" + d.link + "' target='_blank'>Apri documento</a>" +
       "</div>";
   }
@@ -224,8 +248,8 @@ function render(){
 }
  
 render();
- 
 </script>
  
 </body>
 </html>
+ 
