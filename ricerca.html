@@ -142,45 +142,47 @@ body{
 <a class="home-link" href="index.html">🏠 Torna alla Home</a>
  
 </div>
- 
 <script>
- 
+/* ✅ DATABASE RIFIUTI
+   - campi minimi: nome, cer, unita
+   - campi opzionali: contenitore, note
+*/
 const rifiuti = [
   { nome: "scarto di sigillanti", cer: "080410", unita: "CE" },
-{ nome: "olio motore esausto", cer: "130208*", unita: "CE" },
-{ nome: "solvente esausto", cer: "140603*", unita: "CE" },
-{ nome: "carta cartone", cer: "150101", unita: "CE" },
-{ nome: "carta cartone non pressato", cer: "150101", unita: "CE" },
-{ nome: "imballaggi plastica-nylon pulito", cer: "150102", unita: "CE" },
-{ nome: "imballaggi legno", cer: "150103", unita: "CE" },
-{ nome: "imballaggi materiali misti", cer: "150106", unita: "CE" },
-{ nome: "imballi imbrattati", cer: "150110*", unita: "CE" },
+{ nome: "olio motore esausto", cer: "130208*", unita: "CE", contenitore:"cisternetta olio motore esausto", note:  "non miscelare con le emulsioni" },
+{ nome: "solvente esausto", cer: "140603*", unita: "CE", contenitore:"cisternetta o bidone solvente esausto", note:  "non miscelare con le emulsioni"  },
+{ nome: "carta cartone", cer: "150101", unita: "CE", contenitore: "contenitore giallo" },
+{ nome: "carta cartone non pressato", cer: "150101", unita: "CE", contenitore: "contenitore giallo" },
+{ nome: "imballaggi plastica-nylon pulito", cer: "150102", unita: "CE", note:"da non confondere con i contenitori di sostanze pericolose" },
+{ nome: "imballaggi legno", cer: "150103", unita: "CE", note: "le padanine vanno messe dentro ai contenitori"},
+{ nome: "imballaggi materiali misti", cer: "150106", unita: "CE", note: "dove possibile è necessario separare carta-legno-nylon" },
+{ nome: "imballi imbrattati", cer: "150110*", unita: "CE", note:"le bombolette spray NON fanno parte di questo rifiuto"},
 { nome: "teli lavatrice reman", cer: "150202*", unita: "CE" },
-{ nome: "sabbia assorbente", cer: "150202*", unita: "CE" },
-{ nome: "dpi stracci guanti tute", cer: "150202*", unita: "CE" },
+{ nome: "sabbia assorbente", cer: "150202*", unita: "CE", note:"va raccolta negli appositi big bag" },
+{ nome: "dpi stracci guanti tute", cer: "150202*", unita: "CE", note:"i panni MEWA hanno i loro bidoni specifici" },
 { nome: "filtri aria abitacolo", cer: "150203", unita: "CE" },
 { nome: "filtri aria cabine verniciatura", cer: "150202*", unita: "CE" },
 { nome: "bombolette spray", cer: "160504*", unita: "CE " },
-{ nome: "filtri olio", cer: "160107*", unita: "CE" },
+{ nome: "filtri olio", cer: "160107*", unita: "CE", contenitore: "fusto"},
 { nome: "pastiglie freni", cer: "160112", unita: "CE" },
-{ nome: "paraflu'", cer: "160114*", unita: "CE" },
+{ nome: "paraflu'", cer: "160114*", unita: "CE", note:"non va mischiato alle emulsioni" },
 { nome: "metalli ferrosi da autoveicoli", cer: "160117", unita: "CE" },
-{ nome: "motori e cambi", cer: "160117", unita: "CE" },
+{ nome: "motori e cambi", cer: "160117", unita: "CE", note:"vanno sempre bonificati prima di essere messi a riifiuto"},
 { nome: "metalli non ferrosi da autoveicoli", cer: "160118", unita: "CE" },
 { nome: "cerchi ruota", cer: "160118", unita: "CE" },
 { nome: "plastica da autoveicoli", cer: "160119", unita: "CE" },
 { nome: "vetro da autoveicoli", cer: "160120", unita: "CE" },
 { nome: "plastica imbrattata", cer: "160121*", unita: "CE" },
-{ nome: "ferro imbrattato", cer: "160121*", unita: "CE" },
+{ nome: "ferro imbrattato", cer: "160121*", unita: "CE", note: "con imbrattato si intende quando la quantità di olio presente è importante" },
 { nome: "componenti non specificati altrimenti", cer: "160122", unita: "CE" },
 { nome: "sonde lambda", cer: "160122", unita: "CE" },
 { nome: "caricabatterie motori elettrici", cer: "160214", unita: "CE" },
 { nome: "catalzzatori esauriti", cer: "160801", unita: "CE" },
 { nome: "acque di lavaggio iscot", cer: "161002", unita: "CE" },
 { nome: "vetro", cer: "170202", unita: "CE" },
-{ nome: "plastica", cer: "170203", unita: "CE" },
-{ nome: "alluminio", cer: "170402", unita: "CE" },
-{ nome: "ferro e acciaio", cer: "170405", unita: "CE" },
+{ nome: "plastica", cer: "170203", unita: "CE", note: questo rifiuto deriva da processi di demolizione e costruzione" },
+{ nome: "alluminio", cer: "170402", unita: "CE",note: questo rifiuto deriva da processi di demolizione e costruzione" },
+{ nome: "ferro e acciaio", cer: "170405", unita: "CE", note: questo rifiuto deriva da processi di demolizione e costruzione" },
 { nome: "cavi elettrici", cer: "170411", unita: "CE" },
 { nome: "neon", cer: "200121*", unita: "CE" },
 { nome: "residui pulizia stradale", cer: "200303", unita: "CE" },
@@ -190,93 +192,129 @@ const rifiuti = [
 { nome: "centraline ", cer: "160214", unita: "CE" },
 { nome: "alternatori", cer: "160216", unita: "CE" },
 { nome: "motorini d'avviamento", cer: "160216", unita: "CE" },
-{ nome: "thermal  pad", cer: "160304", unita: "CE" },
+{ nome: "thermal  pad", cer: "160304", unita: "CE" contenitore: "big bag"},
 { nome: "serbatoi urea con residuo", cer: "160121*", unita: "CE" },
-{ nome: "altre emulsioni", cer: "130802*", unita: "CE" },
+{ nome: "altre emulsioni", cer: "130802*", unita: "CE", note:"rifiuto liquido composto solo da acqua e olio" },
 { nome: "moduli litio", cer: "160605", unita: "CE" },
 { nome: "batterie litio", cer: "160605", unita: "CE" },
 { nome: "motori elettrici", cer: "160214", unita: "CE" },
 { nome: "carboni attivi", cer: "150202*", unita: "CE" },
 { nome: "urea (residuo estratto dai serbatoi sorting)", cer: "160305*", unita: "CE" },
 { nome: "rame", cer: "170401", unita: "CE" },
-{ nome: "olio motore esausto", cer: "130208*", unita: "PORTA28" },
-{ nome: "diesel", cer: "130701*", unita: "PORTA28" },
-{ nome: "benzina", cer: "130703*", unita: "PORTA28" },
-{ nome: "gas refrigerante ", cer: "140601* ", unita: "PORTA28" },
-{ nome: "carta cartone", cer: "150101", unita: "PORTA28" },
-{ nome: "imballaggi plastica-nylon pulito", cer: "150102", unita: "PORTA28" },
-{ nome: "dpi stracci guanti tute", cer: "150202*", unita: "PORTA28" },
-{ nome: "sabbia assorbente", cer: "150202*", unita: "PORTA28" },
-{ nome: "pneumatici fuori uso", cer: "160103", unita: "PORTA28" },
-{ nome: "veicoli fuori uso bonificati-scocche", cer: "160106", unita: "PORTA28" },
-{ nome: "filtri olio", cer: "160107*", unita: "PORTA28" },
-{ nome: "airbag inesplosi", cer: "160110*", unita: "PORTA28" },
-{ nome: "pastiglie freni", cer: "160112", unita: "PORTA28" },
-{ nome: "metalli ferrosi da autoveicoli", cer: "160117", unita: "PORTA28" },
-{ nome: "cerchi ruota", cer: "160118", unita: "PORTA28" },
-{ nome: "tessuto aiirbag", cer: "160119", unita: "PORTA28" },
-{ nome: "componenti non specificati altrimenti blocchi motore", cer: "160122", unita: "PORTA28" },
-{ nome: "componenti non specificati altrimenti pannelleria", cer: "160122", unita: "PORTA28" },
-{ nome: "componenti non specificati altrimenti scarti di cinture di sicurezza", cer: "160122", unita: "PORTA28" },
-{ nome: "componenti non specificati altrimenti spugne sedili", cer: "160122", unita: "PORTA28" },
-{ nome: "plastica da autoveicoli", cer: "160119", unita: "PORTA28" },
-{ nome: "inverter", cer: "160214", unita: "PORTA28" },
-{ nome: "centraline", cer: "160214", unita: "PORTA28" },
-{ nome: "radio navigatore", cer: "160214", unita: "PORTA28" },
-{ nome: "chiavi", cer: "160214", unita: "PORTA28" },
-{ nome: "urea ad-blue", cer: "160306", unita: "PORTA28" },
-{ nome: "bombole gpl metano", cer: "160504*", unita: "PORTA28" },
-{ nome: "batterie al piombo", cer: "160601*", unita: "PORTA28" },
-{ nome: "batterie litio", cer: "160605", unita: "PORTA28" },
-{ nome: "liquido lavavetri", cer: "161002", unita: "PORTA28" },
+{ nome: "olio motore esausto", cer: "130208*", unita: "DISMANTLING", contenitore:"cisternetta olio motore esausto", note:  "non miscelare con le emulsioni" },
+{ nome: "diesel", cer: "130701*", unita: "DISMANTLING" },
+{ nome: "benzina", cer: "130703*", unita: "DISMANTLING" },
+{ nome: "gas refrigerante ", cer: "140601* ", unita: "DISMANTLING" },
+{ nome: "carta cartone", cer: "150101", unita: "DISMANTLING" },
+{ nome: "imballaggi plastica-nylon pulito", cer: "150102", unita: "DISMANTLING", note:"da non confondere con i contenitori di sostanze pericolose" },
+{ nome: "dpi stracci guanti tute", cer: "150202*", unita: "DISMANTLING" },
+{ nome: "sabbia assorbente", cer: "150202*", unita: "DISMANTLING" },
+{ nome: "pneumatici fuori uso", cer: "160103", unita: "DISMANTLING" },
+{ nome: "veicoli fuori uso bonificati-scocche", cer: "160106", unita: "DISMANTLING" },
+{ nome: "filtri olio", cer: "160107*", unita: "DISMANTLING", contenitore:"fusto" },
+{ nome: "airbag inesplosi", cer: "160110*", unita: "DISMANTLING", contenitore:"fusto chiuso e spostato dalle aree operative a fine turno" },
+{ nome: "pastiglie freni", cer: "160112", unita: "DISMANTLING" },
+{ nome: "metalli ferrosi da autoveicoli", cer: "160117", unita: "DISMANTLING" },
+{ nome: "cerchi ruota", cer: "160118", unita: "DISMANTLING" },
+{ nome: "tessuto aiirbag", cer: "160119", unita: "DISMANTLING" },
+{ nome: "componenti non specificati altrimenti blocchi motore", cer: "160122", unita: "DISMANTLING" },
+{ nome: "componenti non specificati altrimenti pannelleria", cer: "160122", unita: "DISMANTLING" },
+{ nome: "componenti non specificati altrimenti scarti di cinture di sicurezza", cer: "160122", unita: "DISMANTLING" },
+{ nome: "componenti non specificati altrimenti spugne sedili", cer: "160122", unita: "DISMANTLING" },
+{ nome: "plastica da autoveicoli", cer: "160119", unita: "DISMANTLING" },
+{ nome: "inverter", cer: "160214", unita: "DISMANTLING" },
+{ nome: "centraline", cer: "160214", unita: "DISMANTLING" },
+{ nome: "radio navigatore", cer: "160214", unita: "DISMANTLING" },
+{ nome: "chiavi", cer: "160214", unita: "DISMANTLING" },
+{ nome: "urea ad-blue", cer: "160306", unita: "DISMANTLING" },
+{ nome: "bombole gpl metano", cer: "160504*", unita: "DISMANTLING" },
+{ nome: "batterie al piombo", cer: "160601*", unita: "DISMANTLING", contenitore: "vanno sempre smaltite nel loro contenitore dedicato" },
+{ nome: "batterie litio", cer: "160605", unita: "DISMANTLING" },
+{ nome: "liquido lavavetri", cer: "161002", unita: "DISMANTLING" },
 
-
-
+  
 ];
  
- function cerca() {
+/* ✅ utility */
+function isPericoloso(item){
+  const c = (item.cer || "").toString();
+  return c.includes("*");
+}
  
+function yesNo(v){
+  return v ? "Sì" : "No";
+}
+ 
+function safe(t){
+  return (t === undefined || t === null || String(t).trim() === "") ? "—" : String(t);
+}
+ 
+/* ✅ cerca */
+function cerca(){
   const input = document.getElementById("search");
   const out = document.getElementById("output");
+  const valore = (input.value || "").toLowerCase().trim();
  
-  const valore = input.value.toLowerCase().trim();
- 
-  if (valore === "") {
+  if(!valore){
     out.innerHTML = "Inserisci un rifiuto da cercare.";
     return;
   }
  
-  let risultati = [];
+  // match su nome oppure su CER
+  const risultati = rifiuti.filter(r => {
+    const nome = (r.nome || "").toLowerCase();
+    const cer = (r.cer || "").toLowerCase();
+    return nome.includes(valore) || cer.includes(valore);
+  });
  
-  for (let i = 0; i < rifiuti.length; i++) {
-    if (rifiuti[i].nome.includes(valore)) {
-      risultati.push(rifiuti[i]);
-    }
-  }
- 
-  if (risultati.length === 0) {
+  if(risultati.length === 0){
     out.innerHTML = "Nessun rifiuto trovato.";
     return;
   }
  
   let html = "";
  
-  for (let i = 0; i < risultati.length; i++) {
+  risultati.forEach(r => {
+    const per = isPericoloso(r);
+ 
+    // default intelligenti
+    
  
     html +=
-      "<div style='margin-bottom:14px;padding:12px;border:1px solid #d6e9e1;border-radius:12px;background:#f4fbf7'>" +
-      "<div style='font-weight:600;font-size:15px;margin-bottom:6px'>" + risultati[i].nome + "</div>" +
-      "<div style='font-weight:600;color:#0b8f55;margin-bottom:4px'>CER " + risultati[i].cer + "</div>" +
-      "<div><strong>Unità locale:</strong> " + risultati[i].unita + "</div>" +
+      "<div style='margin-bottom:14px;padding:12px;border:1px solid #d6e9e1;border-radius:14px;background:#ffffff;box-shadow:0 6px 14px rgba(0,0,0,0.03)'>" +
+        "<div style='display:flex;justify-content:space-between;align-items:flex-start;gap:10px'>" +
+          "<div style='font-weight:700;margin-bottom:6px'>" + safe(r.nome) + "</div>" +
+          "<div style='padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px;" +
+              (per ? "background:#ffe4e6;color:#b42318;border:1px solid #fecdd3" : "background:#e8f5ef;color:#0b8f55;border:1px solid #d6e9e1") +
+          "'>" +
+            (per ? "🔴 PERICOLOSO" : "🟢 NON PERICOLOSO") +
+          "</div>" +
+        "</div>" +
+ 
+        "<div style='font-size:14px;line-height:1.5'>" +
+          "<div><strong>CER:</strong> " + safe(r.cer) + "</div>" +
+          "<div><strong>Unità locale:</strong> " + safe(r.unita) + "</div>" +
+          "<div><strong>Contenitore:</strong> " + safe(r.contenitore) + "</div>" +
+          "<div><strong>Note operative:</strong> " + safe(r.note) + "</div>" +
+        "</div>" +
       "</div>";
-  }
+  });
  
   out.innerHTML = html;
-
-
 }
  
+/* ✅ invio con Enter */
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("search");
+  if(input){
+    input.addEventListener("keydown", (e) => {
+      if(e.key === "Enter") cerca();
+    });
+  }
+});
 </script>
+  
+
  
 </body>
 </html>
